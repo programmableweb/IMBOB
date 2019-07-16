@@ -1,0 +1,20 @@
+[
+  {
+    "id":"8892c088-c709-4888-bd98-fdecc2d0cc89",
+    "username": "dicktracy",
+    "password": "cooluser1",
+    "scopes": ["GENERAL", "ADMIN", "PERSONAL"]
+  },
+  {
+    "id":"8a214ced-3fb8-42b7-aeb7-0775d17f7218",
+    "username": "bugsbunny",
+    "password": "cooluser2",
+    "scopes": ["GENERAL"]
+  },
+  {
+    "id":"4cbd813a-478a-4843-97f6-093138dd5b1f",
+    "username": "daffyduck",
+    "password": "cooluser1",
+    "scopes": ["PERSONAL"]
+  }
+]
