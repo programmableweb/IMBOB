@@ -1,0 +1,43 @@
+{
+  "name": "imbob",
+  "version": "1.0.0",
+  "description": "A simple GraphQL API project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha test",
+    "subscriptionListener": "node subscriptionListener.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://reselbob@github.com/reselbob/IMBOB.git"
+  },
+  "author": "reselbob",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reselbob/IMBOB/issues"
+  },
+  "homepage": "https://github.com/reselbob/IMBOB#readme",
+  "dependencies": {
+    "apollo-errors": "^1.9.0",
+    "apollo-link": "^1.2.11",
+    "apollo-link-ws": "^1.0.17",
+    "apollo-server": "^2.4.0",
+    "graphql": "^14.3.1",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
+    "node-fetch": "^2.3.0",
+    "subscriptions-transport-ws": "^0.9.16",
+    "uuid": "^3.3.2",
+    "ws": "^6.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "faker": "^4.1.0",
+    "graphql-request": "^1.8.2",
+    "mocha": "^5.2.0",
+    "supertest": "^3.4.2"
+  }
+}
