@@ -1,7 +1,3 @@
-# IMBOB <img src="http://www.gosc.org/_Media/under-construction-yellow-d_med.png" width="60" alt="under construction" />
-
-
-
 
 A simple demonstration application for learning how to implement a GraphQL API using Apollo Server 2.0.
 
