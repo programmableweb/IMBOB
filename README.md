@@ -1,9 +1,19 @@
 
-A simple demonstration application for learning how to implement a GraphQL API using Apollo Server 2.0.
+This code repository contains the source code that goes with ProgrammableWeb's 
+[Guide to GraphQL: Understanding, Building and Using GraphQL APIs](https://www.programmableweb.com/api-university/guide-to-graphql-understanding-building-and-using-graphql-apis).
+The guide is a comprehensive five part series designed to bring API practitioners at any level (beginner,
+intermediate, or advanced) up to speed on GraphQL as a technology and how to work with it. The series includes
+a hands-on tutorial on working with GraphQL that is accompanied by an easy-to-use interactive learning environment
+using the Katacoda platform. That interactive environment. There are also eight videos that ProgrammableWeb 
+has published on its YouTube channel to go along with that interactive environment. Here are links to the key 
+elements (including this repository) of this special package:
 
-![Project Graph](docs/images/actor-query.png "Actor Query") 
+* [ProgrammableWeb's 5-Part Series on Getting Started with GraphQL](https://www.programmableweb.com/api-university/guide-to-graphql-understanding-building-and-using-graphql-apis)
+* [ProgrammableWeb's Interactive Learning Environment on KataCoda](https://www.katacoda.com/programmableweb/scenarios/understanding-graphql-using-imbob)
+* [Playlist of ProgrammableWeb's Companion Videos to go with KataCoda](https://www.youtube.com/playlist?list=PLcgRuP1JhcBPj99Ckn0KDapQmKM9H-T4C)
+* [Downloadable source code for the IMBOB GraphQL API and Demonstration App](https://github.com/programmableweb/IMBOB)
 
-### Table of Contents
+# Table of Contents
 
 * **[Installation and Startup](#installation)**
 * **[Purpose of Project](#purpose)**
