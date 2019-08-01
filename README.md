@@ -4,7 +4,7 @@ This code repository contains the source code that goes with ProgrammableWeb's
 The guide is a comprehensive five part series designed to bring API practitioners at any level (beginner,
 intermediate, or advanced) up to speed on GraphQL as a technology and how to work with it. The series includes
 a hands-on tutorial on working with GraphQL that is accompanied by an easy-to-use interactive learning environment
-using the Katacoda platform. That interactive environment. There are also eight videos that ProgrammableWeb 
+using the Katacoda platform. There are also eight videos that ProgrammableWeb 
 has published on its YouTube channel to go along with that interactive environment. Here are links to the key 
 elements (including this repository) of this special package:
 
