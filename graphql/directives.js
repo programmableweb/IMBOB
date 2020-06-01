@@ -1,24 +1,16 @@
 const {SchemaDirectiveVisitor} = require("graphql-tools");
-
-const {DirectiveLocation,
-    GraphQLDirective
-} =  require("graphql");
-
-const { createError } = require("apollo-server");
-const { IncomingMessage } = require("http");
-
-
+const {DirectiveLocation, GraphQLDirective} = require("graphql");
+const {IncomingMessage} = require("http");
 const config = require("../config");
-const admin = require("../admin");
 
 /*******************************************
-This class provides the processing logic for the directive
-requiresPersonalScope. For now the directive processes information
-found in ../config.js. TokenOne does NOT have permission to access
-fields marked with the directive, requiresPersonalScope.
+ This class provides the processing logic for the directive
+ requiresPersonalScope. For now the directive processes information
+ found in ../config.js. TokenOne does NOT have permission to access
+ fields marked with the directive, requiresPersonalScope.
 
-Token one does have permission to access directives marked with
-requiresPersonalScope.
+ TokenTwo does have permission to access directives marked with
+ requiresPersonalScope.
  ********************************************/
 class RequiresPersonalScope extends SchemaDirectiveVisitor {
     static getDirectiveDeclaration(directiveName, schema) {
@@ -35,8 +27,8 @@ class RequiresPersonalScope extends SchemaDirectiveVisitor {
             const field = fields[fieldName];
             const next = field.resolve;
 
-            field.resolve = function(result, args, context, info) {
-                isValidToken({ context }); // will throw error if not valid signed jwt
+            field.resolve = function (result, args, context, info) {
+                isValidToken({context}); // will throw error if not valid signed jwt
                 return next(result, args, context, info);
             };
         });
@@ -45,11 +37,11 @@ class RequiresPersonalScope extends SchemaDirectiveVisitor {
     visitFieldDefinition(field) {
         const next = field.resolve;
 
-        field.resolve = function(result, args, context, info) {
+        field.resolve = function (result, args, context, info) {
             //get the affected field
             const affectedField = info.fieldName;
 
-            if(!isValidToken({ context })){
+            if (!isValidToken({context})) {
                 result[affectedField] = 'You are not authorized to view personal information';
             }
             return result[affectedField];
@@ -57,14 +49,9 @@ class RequiresPersonalScope extends SchemaDirectiveVisitor {
     }
 }
 
-
-
-const isValidToken = ({ context }) => {
+const isValidToken = ({context}) => {
     const req = context instanceof IncomingMessage ? context : (context.req || context.request);
     return config.hasPersonalScope(config.getToken(req));
 };
-
-
-
 
 module.exports = RequiresPersonalScope;

@@ -48,10 +48,6 @@ const getCollectionConfigSync = (collectionName) =>{
             holder.filename = 'triples.json';
             holder.env = 'TRIPLES';
             break;
-        case 'USERS':
-            holder.filename = 'users.json';
-            holder.env = 'USERS';
-            break;
     };
 
     return holder;
@@ -67,20 +63,27 @@ const saveCollection = async (collectionName, collection)=>{
 };
 
 const getCollection = (collectionName) =>{
-    const holder = getCollectionConfigSync(collectionName);
-    if(!process.env[holder.env])process.env[holder.env] = fileToObjectSync(holder.filename);
-    return JSON.parse(process.env[holder.env]);
+    switch(collectionName.toUpperCase()){
+        case 'MOVIES':
+            if(!process.env.MOVIES)process.env.MOVIES = fileToObjectSync('movies.json');
+            return JSON.parse(process.env.MOVIES);
+        case 'PERSONS':
+            if(!process.env.PERSONS)process.env.PERSONS = fileToObjectSync('persons.json');
+            return JSON.parse(process.env.PERSONS);
+        case 'TRIPLES':
+            if(!process.env.TRIPLES)process.env.TRIPLES = fileToObjectSync('triples.json');
+            const arr = JSON.parse(process.env.TRIPLES);
+            arr.forEach(a => a.createdAt = new Date(a.createdAt));
+            return arr;
+    }
 };
 
 const initGlobalDataSync = ()=>{
     getCollection('movies');
     getCollection('persons');
     getCollection('triples');
-    getCollection('users');
 };
-/*
-    returns the data object to be added to collection, if successful
- */
+
 const updateCollection =  async function(dataObj, collectionName){
     const holder = getCollectionConfigSync(collectionName);
     let filespec = path.join(__dirname, holder.filename);
@@ -102,11 +105,23 @@ const updateCollection =  async function(dataObj, collectionName){
     return dataObj;
 };
 
-const replaceCollection =  async function(newCollection, collectionName){
-    const holder = getCollectionConfigSync(collectionName);
+const replaceCollection =  async function(dataObj, collectionName){
+    const holder = {};
+    switch(collectionName.toUpperCase()){
+        case 'MOVIES':
+            holder.filename = 'movies.json';
+            break;
+        case 'PERSONS':
+            holder.filename = 'persons.json';
+            break;
+        case 'TRIPLES':
+            holder.filename = 'triples.json';
+            break;
+    }
     let filespec = path.join(__dirname, holder.filename);
-    await objectToFile(filespec, newCollection);
-    return await getCollection(collectionName)
+    await objectToFile(filespec, data);
+    return data;
+    const data = JSON.stringify(dataObj);
 };
 
 

@@ -239,9 +239,6 @@ module.exports = `
     }
 
     type Query {
-        """Returns the JWT token to be attached to all subsequent queries
-        mutations and subscriptions""" 
-        login(username: String!, password: String!): String
         persons (paginationSpec: CursorPaginationInput): Persons
         person(id: ID!): Person
         actor(id: ID!): Actor

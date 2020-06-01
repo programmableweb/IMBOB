@@ -6,7 +6,6 @@ const typeDefs = require('./graphql/typedefs');
 const resolvers = require('./graphql/resolvers');
 const RequiresPersonalScope = require('./graphql/directives');
 const config = require('./config');
-const admin = require('./admin');
 
 
 const PORT = process.env.PORT || 4000;
@@ -29,26 +28,34 @@ const schema = makeExecutableSchema({
     }
 });
 
-
-
 const server = new ApolloServer({
-    subscriptions,schema, context: ({req, res}) => {
-        //if it's login or has a valid JWT token, let it is
+    subscriptions,
+    schema,
+    context: ({req, res}) => {
         if(req){
-            const accessTime = new Date();
-            console.log({operation: req.operation, accessTime})
-            if (!admin.isValidRequest(req))throw new Error("Authorization Error");
             const token = config.getToken(req);
-            console.log({token, accessTime});
-            return req;
+            if (req.body.operationName === 'IntrospectionQuery'){
+                const accessTime = new Date();
+                console.log({operation: req.body.operationName, token, accessTime});
+                return req;
+            }
+            if(!config.canAccess(token)){
+                const err = new AuthenticationError(token);
+                console.log(err);
+                throw err;
+            }else{
+                const accessTime = new Date();
+                console.log({operation: req.body.operationName, token, accessTime});
+                return req;
+            }
+
         }
     }
 });
 
-/*
-Initialize the data collections globally by calling initGlobalDataSync()
-to load the data into the global environment variables
-*/
+
+//Initialize the data collections globally by calling initGlobalDataSync()
+//to load the data into the global environment variables
 initGlobalDataSync();
 
 // The server `listen` method launches a web-server and a
