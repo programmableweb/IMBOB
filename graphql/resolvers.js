@@ -2,7 +2,7 @@ const _ = require('lodash');
 const {PubSub, ApolloError } = require('apollo-server');
 const uuidv4 = require('uuid/v4');
 const {getCollection, updateCollection, getItemFromCollection} = require('../data/index');
-const {getRuntimeInfo,login, validateToken} = require('../admin');
+const {getRuntimeInfo} = require('../admin/runtimeInfo');
 
 const pubsub = new PubSub();
 
@@ -322,11 +322,6 @@ module.exports = {
         }
     },
     Query: {
-        login: async(parent, args) => {
-            const token =  login(args.username, args.password);
-            console.log(token);
-            return token;
-        },
         persons: async (parent, args, context, info) => {
             return await getPersons(args.paginationSpec);
         },
